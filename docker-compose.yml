@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  app:
+    image: ghcr.io/guidojw/rudolfs-auth:latest
+    restart: unless-stopped
+    volumes:
+      - /opt/app/node_modules
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.rudolfs-auth.rule=Host(`$HOST`) && PathPrefix(`/auth`)
+      - traefik.http.routers.rudolfs-auth.tls.certresolver=default
